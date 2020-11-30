@@ -1,0 +1,53 @@
+% !TeX program = xelatex
+% !TeX encoding = UTF-8 Unicode
+% !BIB program = biber
+
+\documentclass[ieee,english]{slides}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+
+\title{Command Governor Supervisor Scheme Based On Region Of Attraction}
+
+\addauthor{Álan Crístoffer e Sousa}{acristoffers@gmail.com}
+
+\setorientador{Prof.\ Dr.\ Valter Júnior de Souza Leite}
+\addcoorientador{Prof.\ Dr.\ Walter Lucia}
+
+\addmembrobanca{Prof.\ Dr.\ Erivelton Geraldo Nepomuceno}
+\addmembrobanca{Prof.\ Dr.\ Márcio Fantini Miranda}
+
+\setdepartamento{Graduate Program in Electrical Engineering}
+\seteixodeformacao{System Control}
+
+\setlocal{Divinópolis}
+\setano{2020}
+\setmes{December}
+
+\preamble{}
+
+\addbibresource{bibliothek.bib}
+
+\begin{document}
+\maketitle{}
+
+\begin{slide}{Index}
+  \begin{minipage}[t][0.6\textheight][t]{0.5\textwidth}
+    \tableofcontents[sections={1-3}]
+  \end{minipage}
+  \begin{minipage}[t][4\baselineskip][t]{0.5\textwidth}
+    \tableofcontents[sections={4-}]
+  \end{minipage}
+  \vfill\null{}
+\end{slide}
+
+\include{section1}
+\include{section2}
+\include{section3}
+
+\begin{frame}[allowframebreaks]{Referências}
+  \nocite{*}
+  \printbibliography{}
+\end{frame}
+\end{document}

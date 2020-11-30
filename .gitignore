@@ -1,0 +1,5 @@
+.auctex-auto
+build
+*.log
+svg-inkscape
+.svg-inkscape
