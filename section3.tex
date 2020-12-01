@@ -8,14 +8,11 @@
 \label{subsec:level-system}
 
 \begin{slide}{System Description}
-  \vspace*{\fill}
   \input{imgs/tanks-sim}
-  \vspace*{\fill}
 \end{slide}
 
 \begin{slide}{System Description}
-  \vspace*{\fill}
-  \begin{columns}[T]
+  \begin{columns}[c]
     \begin{column}{0.48\textwidth}
       \begin{equation}
         \label{eq:formula-height-variation-lin}
@@ -48,12 +45,10 @@
       \end{equation}
     \end{column}%
   \end{columns}
-  \vspace*{\fill}
 \end{slide}
 
 \begin{slide}{System Description}
-  \vspace*{\fill}
-  \begin{columns}[T]
+  \begin{columns}[c]
     \begin{column}{0.38\textwidth}
       \begin{equation}
         \begin{aligned}
@@ -100,11 +95,9 @@
     \end{column}%
     %
   \end{columns}
-  \vspace*{\fill}
 \end{slide}
 
 \begin{slide}{System Description}
-  \vspace*{\fill}
   \begin{figure}[ht!]
     \centering
     \captionsetup{justification=centering}
@@ -124,15 +117,13 @@
     \caption{Control signals for Example 1.}%
     \label{fig:level-system-control-signals}
   \end{figure}
-  \vspace*{\fill}
 \end{slide}
 
 \subsection{Unstable System}%
 \label{subsec:unstable-system}
 
 \begin{slide}{Goal of Command Governor}
-  \vspace*{\fill}
-  \begin{columns}[T]
+  \begin{columns}[c]
     \begin{column}{0.38\textwidth}
       \begin{equation}
         \begin{aligned}
@@ -197,11 +188,9 @@
       \end{equation}
     \end{column}%
   \end{columns}
-  \vspace*{\fill}
 \end{slide}
 
 \begin{slide}{Goal of Command Governor}
-  \vspace*{\fill}
   \begin{figure}[ht!]
     \centering
     \captionsetup{justification=centering}
@@ -209,11 +198,9 @@
     \caption{States trajectory for Example 2}%
     \label{fig:unstable-states}
   \end{figure}
-  \vspace*{\fill}
 \end{slide}
 
 \begin{slide}{Goal of Command Governor}
-  \vspace*{\fill}
   \begin{figure}[ht!]
     \centering
     \captionsetup{justification=centering}
@@ -221,61 +208,51 @@
     \caption{Control signals for Example 2}%
     \label{fig:unstable-control-signals}
   \end{figure}
-  \vspace*{\fill}
 \end{slide}
 
 \subsection{Cessna 182}%
 \label{subsec:cessna}
 
 \begin{slide}{Goal of Command Governor}
-  \vspace*{\fill}
   \begin{figure}[ht!]
     \centering \captionsetup{justification=centering}
     \includegraphics[height=0.75\textheight]{cessna-u}
     \caption{Cessna simulation control signal}%
     \label{fig:cessna-u}
   \end{figure}
-  \vspace*{\fill}
 \end{slide}
 
 \begin{slide}{Goal of Command Governor}
-  \vspace*{\fill}
   \begin{figure}[ht!]
     \centering \captionsetup{justification=centering}
     \includegraphics[height=0.75\textheight]{cessna-x}
     \caption{Cessna simulation states}%
     \label{fig:cessna-x}
   \end{figure}
-  \vspace*{\fill}
 \end{slide}
 
 \subsection{Coupled Tanks}%
 \label{subsec:tanks}
 
 \begin{slide}{Goal of Command Governor}
-  \vspace*{\fill}
   \begin{figure}[ht!]
     \centering \captionsetup{justification=centering}
     \includegraphics[height=.75\textheight]{tanks-real}
     \caption{Tank system}%
     \label{fig:tanks-real}
   \end{figure}
-  \vspace*{\fill}
 \end{slide}
 
 \begin{slide}{Goal of Command Governor}
-  \vspace*{\fill}
   \begin{figure}[ht!]
     \centering \captionsetup{justification=centering}
     \includegraphics[height=.75\textheight]{tanks}
     \caption{Tank system diagram}%
     \label{fig:tanks}
   \end{figure}
-  \vspace*{\fill}
 \end{slide}
 
 \begin{slide}{Goal of Command Governor}
-  \vspace*{\fill}
   \begin{equation}
     \label{eq:t1-area}
     A_{1}(h_{1}(t)) = \frac{3r}{5} \left(
@@ -283,11 +260,9 @@
     e^{-\frac{((h_{1}(t)-8)\times{}10^{-2}-\mu^{2})^{2}}{2\sigma^{2}}}
     \right)
   \end{equation}
-  \vspace*{\fill}
 \end{slide}
 
 \begin{slide}{Goal of Command Governor}
-  \vspace*{\fill}
   \begin{equation}
     \label{eq:formula-height-variation}
     \begin{aligned}
@@ -296,11 +271,9 @@
       \dot{h}_2(t) & = \frac{h_{1}(t)-h_{2}(t)}{R_{12}(h_{1}(t),h_{2}(t))\times{}A_{2}} - \frac{q_{o}(h_{2}(t))}{A_{2}}.
     \end{aligned}
   \end{equation}
-  \vspace*{\fill}
 \end{slide}
 
 \begin{slide}{Goal of Command Governor}
-  \vspace*{\fill}
   \begin{equation}
     \begin{aligned}
       \label{eq:op-points}
@@ -346,11 +319,9 @@
         \end{array}\right].
     \end{aligned}
   \end{equation}
-  \vspace*{\fill}
 \end{slide}
 
 \begin{slide}{Goal of Command Governor}
-  \vspace*{\fill}
   \begin{equation}
     \begin{aligned}
       K_{1} & = \begin{bmatrix} -12.884 & -97.540 & -13.975 \end{bmatrix}, \\
@@ -359,27 +330,22 @@
       K_{4} & = \begin{bmatrix} -1.832  & -21.527 & -4.177 \end{bmatrix}.
     \end{aligned}
   \end{equation}
-  \vspace*{\fill}
 \end{slide}
 
 \begin{slide}{Goal of Command Governor}
-  \vspace*{\fill}
   \begin{figure}[ht!]
     \centering \captionsetup{justification=centering}
     \includegraphics[width=0.7\linewidth]{tanks-dwell}
     \caption{Dwell-time approach}%
     \label{fig:tanks-dwell}
   \end{figure}
-  \vspace*{\fill}
 \end{slide}
 
 \begin{slide}{Goal of Command Governor}
-  \vspace*{\fill}
   \begin{figure}[ht!]
     \centering \captionsetup{justification=centering}
     \includegraphics[width=0.7\linewidth]{tanks-roa}
     \caption{Proposed RoA-based approach}%
     \label{fig:tanks-roa}
   \end{figure}
-  \vspace*{\fill}
 \end{slide}

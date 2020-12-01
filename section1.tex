@@ -8,28 +8,138 @@
 \label{subsec:switched-systems}
 
 \begin{slide}{Switched Systems}
-  \vspace*{\fill}
-  Describe switched systems
-  \vspace*{\fill}
+  \begin{columns}[c]
+    \begin{column}{0.48\textwidth}
+      A switched system is a system composed of many subsystems, called modes,
+      and a mode-transition rule.
+    \end{column}%
+    \hfill%
+    \begin{column}{0.48\textwidth}
+      \begin{equation}
+        \begin{aligned}
+          \dot{x}(t) & = f_{\sigma(t)}(t,x(t),u(t)), \\
+          y(t)       & = g_{\sigma(t)}(t,x(t)),
+        \end{aligned}
+      \end{equation}
+      \vspace*{1cm}
+      \begin{equation}
+        \begin{aligned}
+          \dot{x}(t) & = A_{\sigma(t)}x(t) + B_{\sigma(t)}u(t), \\
+          y(t)       & = C_{\sigma(t)}x(t) + D_{\sigma(t)}u(t).
+        \end{aligned}
+      \end{equation}
+    \end{column}%
+  \end{columns}
+\end{slide}
+
+\begin{slide}{Switched Systems Stability Problem}
+  \begin{columns}[c]
+    \begin{column}{0.48\textwidth}
+      The system is stable under arbitrary switching if\\
+      \vspace*{1cm}
+      This stability guarantee is only valid inside the region
+    \end{column}%
+    \hfill%
+    \begin{column}{0.48\textwidth}
+      \begin{equation}
+        A_{i}^{\top}P+PA_{i} \prec{} 0.
+      \end{equation}
+      \vspace*{1cm}
+      \begin{equation}
+        x^{\top}Px \leq 1
+      \end{equation}
+    \end{column}%
+  \end{columns}
 \end{slide}
 
 \subsection{Command Governor}%
 \label{subsec:cg}
 
+\begin{slide}{Problem Description}
+  \begin{columns}[c]
+    \begin{column}{0.48\textwidth}
+      How to keep the system's state and/or inputs constrained.
+    \end{column}%
+    \hfill%
+    \begin{column}{0.48\textwidth}
+      \input{imgs/cg-goal}
+    \end{column}%
+  \end{columns}
+\end{slide}
+
 \begin{slide}{Command Governor}
-  \vspace*{\fill}
-  \input{imgs/cg-schematic}
-  \vspace*{\fill}
+  \begin{columns}[c]
+    \begin{column}{0.55\textwidth}
+      \input{imgs/cg-schematic}
+    \end{column}%
+    \hfill%
+    \begin{column}{0.45\textwidth}
+      \vspace*{0.5cm}
+      \begin{equation}
+        \begin{aligned}
+          x(k+1) & = A_{i}x(k)+B_{i}u(k), \\
+          y(k)   & = C_{i}x(k)+D_{i}u(k), \\
+          c(k)   & = E_{i}x(k)+F_{i}u(k).
+        \end{aligned}
+      \end{equation}
+      \begin{enumerate}
+        \item \(\mathcal{C}\) is the set of restrictions.
+        \item \(\mathcal{W} = \{\omega\in\mathbb{R}^{n_y}: c(k)\in\mathcal{C},k\rightarrow\infty{}\}.\)
+        \item \(\mathcal{V}(x(k))=\{\omega\in\mathcal{W}:c(k)\in\mathcal{C},0<k\leq{}k_0\}.\)
+      \end{enumerate}
+      \vspace*{0.5cm}
+      \begin{equation}
+        \begin{aligned}
+          g(k)=\argmin_{\omega\in\mathcal{V}(x(k))} & \norm{\omega-r(k)}^2_\Psi
+        \end{aligned}
+      \end{equation}
+    \end{column}%
+  \end{columns}
 \end{slide}
 
 \subsection{Supervisor}%
 \label{subsec:supervisor}
 
 \begin{slide}{Supervisor}
-  \vspace*{\fill}
   \input{imgs/supervisor-schematic}
-  \vspace*{\fill}
 \end{slide}
 
 \subsection{Region of Attraction}%
 \label{subsec:roa}
+
+\begin{slide}{Poincaré-Bendixson's Theorem}
+  \begin{figure}[!htb]
+    \centering
+    %
+    \begin{subfigure}[b]{0.45\linewidth}
+      \centering
+      \includegraphics[trim=116 155 125 55,clip,width=\linewidth]{imgs/stable-point}
+      \caption{Stable point}%
+      \label{fig:stable-point}
+    \end{subfigure}
+    %
+    \begin{subfigure}[b]{0.45\linewidth}
+      \centering
+      \includegraphics[trim=116 155 125 55,clip,width=\linewidth]{imgs/semi-stable-cycle}
+      \caption{Semi-stable cycle}%
+      \label{fig:semi-stable-cycle}
+    \end{subfigure}
+    %
+    \caption{Different cycles' gradient maps}%
+    \label{fig:poincare-cycles}
+  \end{figure}
+  \begin{equation}
+    \nabla{}H(x)f(x) \leq 0
+  \end{equation}
+\end{slide}
+
+\begin{slide}{Lyapunov's Theorem}
+  \begin{equation}
+    \begin{aligned}
+      V(x)       & = 0 \iff x = 0,                                       \\
+      V(x)       & > 0 \iff x \ne 0,                                     \\
+      V(x_{1})   & > V(x_{2}) \iff x_{1} > x_{2}                         \\
+      \dot{V}(x) & = \nabla{}V(x)f(x) \le 0 \phantom{0} \forall x \ne 0,
+    \end{aligned}
+  \end{equation}
+\end{slide}

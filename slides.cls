@@ -59,8 +59,8 @@
 \RequirePackage{graphicx} % For images
 \RequirePackage{rotate} % To rotate images
 \RequirePackage[section]{placeins} % Prevents figures from floating to wrong places
-\RequirePackage{subfig}
 \RequirePackage{caption}
+\RequirePackage{subcaption}
 \RequirePackage[european,cuteinductors,smartlabels,oldvoltagedirection]{circuitikz} % For circuits
 
 % Math related
@@ -184,8 +184,10 @@
 {
   \begin{frame}{#1}
     \addlogo{}
+    \vspace*{\fill}
     }
     {
+    \vspace*{\fill}
   \end{frame}
 }
 
