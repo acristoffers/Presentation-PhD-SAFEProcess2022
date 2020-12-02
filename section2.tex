@@ -8,12 +8,34 @@
 \label{subsec:dwell-time}
 
 \begin{slide}{Dwell-time}
-  Explaing dwell-time
+  \begin{columns}[c]
+    \begin{column}{0.48\textwidth}
+      The system must wait T seconds before switching modes.
+      \begin{equation}
+        \mathcal{D}_{T} := \{\sigma(\cdot):t_{k+1}-t_{k}\ge{}T\}.
+      \end{equation}
+    \end{column}%
+    \hfill%
+    \begin{column}{0.48\textwidth}
+      \input{imgs/dwell-time-example}
+    \end{column}%
+  \end{columns}
 \end{slide}
 
 \subsection{Region of Attraction}%
 \label{subsec:roa-rule}
 
 \begin{slide}{Region of Attraction}
-  Explaing RoA rule
+  \begin{columns}[c]
+    \begin{column}{0.48\textwidth}
+      \begin{itemize}
+        \item The region of attraction guarantees the stability after switching;
+        \item an optional, hybrid switch can be used.
+      \end{itemize}
+    \end{column}%
+    \hfill%
+    \begin{column}{0.48\textwidth}
+      \input{imgs/roa-example}
+    \end{column}%
+  \end{columns}
 \end{slide}
