@@ -226,14 +226,18 @@
 
       \vfill
 
+      \departamento
+
+      \vfill
+
       \includegraphics[height=1cm]{imgs/cefet}\hspace*{0.5cm}
-      \includegraphics[height=1cm]{imgs/ufsj}\\
-      \departamento\\
-      ~\\
+      \includegraphics[height=1cm]{imgs/ufsj}
+
+      \vfill
+
       \tiny{
         Supervisor: \getorientador{}\\
-        Cosupervisor: \getcoorientadores{}\\
-        Board members: \getmembrosbanca{}
+        Cosupervisor: \getcoorientadores{}
       }
 
       \vfill
@@ -242,6 +246,7 @@
         \usebeamerfont{date}\local{}\\\mes{}~\ano{}
       \end{beamercolorbox}\vskip0.5em
       \endgroup
+
       \vfill
     \end{frame}
   }

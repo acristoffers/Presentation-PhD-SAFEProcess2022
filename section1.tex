@@ -10,8 +10,13 @@
 \begin{slide}{Switched Systems}
   \begin{columns}[c]
     \begin{column}{0.48\textwidth}
-      A switched system is a system composed of many subsystems, called modes,
-      and a mode-transition rule.
+      \begin{itemize}
+        \item A switched system is a system composed of many subsystems, called
+              modes, and a mode-transition rule.
+        \item Switched and switching systems are different in which the former
+              is switched by a supervisor, whereas the latter switches
+              arbitrarily.
+      \end{itemize}
     \end{column}%
     \hfill%
     \begin{column}{0.48\textwidth}
@@ -21,7 +26,7 @@
           y(t)       & = g_{\sigma(t)}(t,x(t)),
         \end{aligned}
       \end{equation}
-      \vspace*{1cm}
+      \vspace*{0.5cm}
       \begin{equation}
         \begin{aligned}
           \dot{x}(t) & = A_{\sigma(t)}x(t) + B_{\sigma(t)}u(t), \\
@@ -35,18 +40,24 @@
 \begin{slide}{Switched Systems Stability Problem}
   \begin{columns}[c]
     \begin{column}{0.48\textwidth}
-      The system is stable under arbitrary switching if\\
-      \vspace*{1cm}
-      This stability guarantee is only valid inside the region
+      \begin{itemize}
+        \item The system can be stable under arbitrary switching.
+        \item In case of nonlinear constraints (input or state) regional
+              stabilization is required.
+        \item Using Regional (or local) stabilization implies determining an
+              estimate of the region of attraction.
+      \end{itemize}
     \end{column}%
     \hfill%
     \begin{column}{0.48\textwidth}
       \begin{equation}
-        A_{i}^{\top}P+PA_{i} \prec{} 0.
+        \begin{aligned}
+          A_{i}^{\top}P+PA_{i} & \prec{} 0 \\
+          P                    & \succ 0
+        \end{aligned}
       \end{equation}
-      \vspace*{1cm}
       \begin{equation}
-        x^{\top}Px \leq 1
+        Re = \{x\in R^n | x^\top P x \leq c,c>0\}
       \end{equation}
     \end{column}%
   \end{columns}
@@ -101,7 +112,15 @@
 \label{subsec:supervisor}
 
 \begin{slide}{Supervisor}
-  \input{imgs/supervisor-schematic}
+  \begin{columns}[T]
+    \begin{column}{0.75\textwidth}
+      \input{imgs/supervisor-schematic}
+    \end{column}%
+    \hfill%
+    \begin{column}{0.4\textwidth}
+      \input{imgs/supervisor-example}
+    \end{column}%
+  \end{columns}
 \end{slide}
 
 \subsection{Region of Attraction}%
@@ -138,8 +157,8 @@
     \begin{aligned}
       V(x)       & = 0 \iff x = 0,                                       \\
       V(x)       & > 0 \iff x \ne 0,                                     \\
-      V(x_{1})   & > V(x_{2}) \iff x_{1} > x_{2}                         \\
-      \dot{V}(x) & = \nabla{}V(x)f(x) \le 0 \phantom{0} \forall x \ne 0,
+      V(x_{1})   & > V(x_{2}) \iff \norm{x_{1}} > \norm{x_{2}},          \\
+      \dot{V}(x) & = \nabla{}V(x)f(x) \le 0 \phantom{0} \forall x \ne 0.
     \end{aligned}
   \end{equation}
 \end{slide}
