@@ -21,7 +21,7 @@
 
       \node (supervisor) [block,above left=of cg3,draw=orange] {Supervisor};
       \node (r) [left=of supervisor] {\(r(k)\)};
-      \draw [->,thick] (supervisor) |- (cg2);
+      \draw [->,thick] (supervisor) |- node [left] {\(r'(k)\)} (cg2);
       \draw [->,thick] (supervisor) |- (cg3);
 
       \node (sw1) [tight,dot,right=2cm of C2]          {};
