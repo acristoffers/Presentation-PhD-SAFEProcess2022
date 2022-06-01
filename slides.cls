@@ -29,26 +29,27 @@
 
 \if@langfr
   \RequirePackage[output-decimal-marker=,,
-    input-complex-roots=i,
+    input-complex-root=i,
     output-complex-root=i,
     complex-root-position=after-number]{siunitx} % SI units
 \else
   \if@langen
     \RequirePackage[output-decimal-marker=.,
-      input-complex-roots=i,
+      input-complex-root=i,
       output-complex-root=i,
       complex-root-position=after-number]{siunitx} % SI units
   \else
     \RequirePackage[output-decimal-marker=,,
-      input-complex-roots=i,
+      input-complex-root=i,
       output-complex-root=i,
       complex-root-position=after-number]{siunitx} % SI units
   \fi
 \fi
 
 % Basic
-\RequirePackage{fontspec}
-\RequirePackage{biblatex}
+\RequirePackage[no-math]{fontspec}
+\RequirePackage{unicode-math}
+\RequirePackage[backend=biber]{biblatex}
 \RequirePackage[useregional]{datetime2}
 \RequirePackage{float}
 \RequirePackage{framed}
@@ -84,13 +85,16 @@
 \RequirePackage{url}
 \RequirePackage{ragged2e} % Justify
 \RequirePackage[absolute, overlay]{textpos} % \textblock
+\RequirePackage{pifont}
 
 % Template Configuration
-\defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
-\setmainfont{Times New Roman}
-\setmonofont{inconsolata}
+\defaultfontfeatures{Ligatures=TeX}
 \usetheme{Dresden}
-\usefonttheme[onlymath]{serif}
+\usefonttheme{serif,professionalfonts}
+\setmainfont{Georgia}
+\setmathfont{Latin Modern Math}
+\setmonofont{Inconsolata Nerd Font Mono}
+\setmathrm{Latin Modern Math}
 
 \setbeamertemplate{headline}
 {
@@ -170,12 +174,11 @@
 
 \newcommand{\addlogo}{
   \begin{textblock}{2}(0.5,14.5)
-    \includegraphics[height=0.5cm]{imgs/cefet}~%
-    \includegraphics[height=0.5cm]{imgs/ufsj}
+    \includegraphics[height=0.5cm]{imgs/urca}
   \end{textblock}
   \begin{textblock*}{\textwidth}(50pt,240pt)
     \begin{flushright}
-      \footnotesize{\getauthornames{}}
+      \footnotesize{e Sousa, Messai, Manamanni}
     \end{flushright}
   \end{textblock*}
 }
@@ -230,8 +233,7 @@
 
       \vfill
 
-      \includegraphics[height=1cm]{imgs/cefet}\hspace*{0.5cm}
-      \includegraphics[height=1cm]{imgs/ufsj}
+      \includegraphics[height=1cm]{imgs/urca}
 
       \vfill
 

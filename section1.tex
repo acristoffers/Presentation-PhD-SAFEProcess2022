@@ -4,161 +4,98 @@
 \section{Introduction}%
 \label{sec:introduction}
 
-\subsection{Switched Systems}%
-\label{subsec:switched-systems}
+\subsection{False Data Injection}%
+\label{subsec:fdi}
 
-\begin{slide}{Switched Systems}
+\begin{slide}{False Data Injection}
   \begin{columns}[c]
     \begin{column}{0.48\textwidth}
       \begin{itemize}
-        \item A switched system is a system composed of many subsystems, called
-              modes, and a mode-transition rule.
-        \item Switched and switching systems are different in which the former
-              is switched by a supervisor, whereas the latter switches
-              arbitrarily.
+        \item \cmark{}~\textbf{Static False Data Injection}: the attacker
+              changes the sensor reading sent, replacing it statically.
+        \item \xmark{}~\textbf{Dynamic False Data Injection}: the attacker
+              changes the sensor reading dynamically, slowly changing it so
+              residuals change slowly.
+      \end{itemize}
+    \end{column}%
+    \hfill%
+    \begin{column}{0.48\textwidth}
+      \begin{align}
+        \tilde{x}_{j} & = x_{i},            \\
+        \tilde{x}_{j} & = x_{j}+\delta,     \\
+        \tilde{x}_{j} & = x_{j}\cdot\alpha,
+      \end{align}
+    \end{column}%
+  \end{columns}
+\end{slide}
+
+\subsection{Functional Observer}%
+\label{subsec:functional-observer}
+
+\begin{slide}{Functional Observer}
+  \begin{columns}[c]
+    \begin{column}{0.48\textwidth}
+      \begin{itemize}
+        \item \(y(t)\) are the measured outputs.
+        \item \(z(t)\) are the states we wish to estimate.
+        \item The observer has a reduced order dynamics system which is
+              equivalent to the original one.
+        \item Problem 1: how to find a \(w(t)\) that correctly estimates
+              \(z(t)\).
+        \item Problem 2: how to find the observer's matrices \(N,J,H\) and
+              \(E\).
+      \end{itemize}
+    \end{column}%
+    \hfill%
+    \begin{column}{0.48\textwidth}
+      \begin{align}
+        \begin{split}
+          \dot{x}(t) & = Ax(t) + Bu(t) + Lf(t), \\
+          y(t)       & = Cx(t),                 \\
+          z(t)       & = Fx(t),
+        \end{split} \\\nonumber\\
+        \begin{split}
+          \dot{w}(t) & = Nw(t) + Jy(t) + Hu(t), \\
+          \hat{z}(t) & = w(t) + Ey(t).
+        \end{split}
+      \end{align}
+    \end{column}%
+  \end{columns}
+\end{slide}
+
+\begin{slide}{Observability}
+  \begin{columns}[c]
+    \begin{column}{0.48\textwidth}
+      \begin{itemize}
+        \item All desired states \(z(t)\) must be observable from the outputs
+              \(y(t)\).
+        \item The observability of \((A,C,F)\) cannot be greater than that of
+              \((A,C)\).
+        \item There must be a path from every output \(y(t)\) to every output
+              \(z(t)\) in the dynamics graph.
       \end{itemize}
     \end{column}%
     \hfill%
     \begin{column}{0.48\textwidth}
       \begin{equation}
-        \begin{aligned}
-          \dot{x}(t) & = f_{\sigma(t)}(t,x(t),u(t)), \\
-          y(t)       & = g_{\sigma(t)}(t,x(t),u(t)),
-        \end{aligned}
-      \end{equation}
-      \vspace*{0.5cm}
-      \begin{equation}
-        \begin{aligned}
-          \dot{x}(t) & = A_{\sigma(t)}x(t) + B_{\sigma(t)}u(t), \\
-          y(t)       & = C_{\sigma(t)}x(t) + D_{\sigma(t)}u(t).
-        \end{aligned}
+        rank
+        \begin{bmatrix}
+          C \\ CA \\ F \\ FA
+        \end{bmatrix}
+        = rank
+        \begin{bmatrix}
+          C \\ CA \\ F
+        \end{bmatrix}.
       \end{equation}
     \end{column}%
   \end{columns}
 \end{slide}
 
-\begin{slide}{Switched Systems Stability Problem}
-  \begin{columns}[c]
-    \begin{column}{0.48\textwidth}
-      \begin{itemize}
-        \item The system can be stable under arbitrary switching.
-        \item In case of nonlinear constraints (input or state) regional
-              stabilization is required.
-        \item Using Regional (or local) stabilization implies determining an
-              estimate of the region of attraction.
-      \end{itemize}
-    \end{column}%
-    \hfill%
-    \begin{column}{0.48\textwidth}
-      \begin{equation}
-        \begin{aligned}
-          A_{i}^{\top}P+PA_{i} & \prec{} 0 \\
-          P                    & \succ 0
-        \end{aligned}
-      \end{equation}
-      \begin{equation}
-        Re = \{x\in R^n | x^\top P x \leq c,c>0\}
-      \end{equation}
-    \end{column}%
-  \end{columns}
-\end{slide}
-
-\subsection{Command Governor}%
-\label{subsec:cg}
-
-\begin{slide}{Problem Description}
-  \begin{columns}[c]
-    \begin{column}{0.48\textwidth}
-      How to keep the system's state and/or inputs constrained.
-    \end{column}%
-    \hfill%
-    \begin{column}{0.48\textwidth}
-      \input{imgs/cg-goal}
-    \end{column}%
-  \end{columns}
-\end{slide}
-
-\begin{slide}{Command Governor}
-  \begin{columns}[c]
-    \begin{column}{0.55\textwidth}
-      \input{imgs/cg-schematic}
-    \end{column}%
-    \hfill%
-    \begin{column}{0.45\textwidth}
-      \vspace*{0.5cm}
-      \begin{equation}
-        \begin{aligned}
-          x(k+1) & = A_{i}x(k)+B_{i}u(k), \\
-          y(k)   & = C_{i}x(k)+D_{i}u(k), \\
-          c(k)   & = E_{i}x(k)+F_{i}u(k).
-        \end{aligned}
-      \end{equation}
-      \begin{enumerate}
-        \item \(\mathcal{C}\) is the set of restrictions.
-        \item \(\mathcal{W} = \{\omega\in\mathbb{R}^{n_y}: c(k)\in\mathcal{C},k\rightarrow\infty{}\}.\)
-        \item \(\mathcal{V}(x(k))=\{\omega\in\mathcal{W}:c(k)\in\mathcal{C},0<k\leq{}k_0\}.\)
-      \end{enumerate}
-      \vspace*{0.5cm}
-      \begin{equation}
-        \begin{aligned}
-          g(k)=\argmin_{\omega\in\mathcal{V}(x(k))} & \norm{\omega-r(k)}^2_\Psi
-        \end{aligned}
-      \end{equation}
-    \end{column}%
-  \end{columns}
-\end{slide}
-
-\subsection{Supervisor}%
-\label{subsec:supervisor}
-
-\begin{slide}{Supervisor}
-  \begin{columns}[T]
-    \begin{column}{0.75\textwidth}
-      \input{imgs/supervisor-schematic}
-    \end{column}%
-    \hfill%
-    \begin{column}{0.4\textwidth}
-      \input{imgs/supervisor-example}
-    \end{column}%
-  \end{columns}
-\end{slide}
-
-\subsection{Region of Attraction}%
-\label{subsec:roa}
-
-\begin{slide}{Poincaré-Bendixson's Theorem}
-  \begin{figure}[!htb]
+\begin{slide}{Path Finder Algorithm}
+  \begin{figure}[ht!]
     \centering
-    %
-    \begin{subfigure}[b]{0.45\linewidth}
-      \centering
-      \includegraphics[trim=116 155 125 55,clip,width=\linewidth]{imgs/stable-point}
-      \caption{Stable point}%
-      \label{fig:stable-point}
-    \end{subfigure}
-    %
-    \begin{subfigure}[b]{0.45\linewidth}
-      \centering
-      \includegraphics[trim=116 155 125 55,clip,width=\linewidth]{imgs/semi-stable-cycle}
-      \caption{Semi-stable cycle}%
-      \label{fig:semi-stable-cycle}
-    \end{subfigure}
-    %
-    \caption{Different cycles' gradient maps}%
-    \label{fig:poincare-cycles}
+    \includegraphics[width=\textheight]{graph-puma}
+    \caption{Puma 560 dynamic's graph representation.}%
+    \label{fig:puma-graph}
   \end{figure}
-  \begin{equation}
-    \nabla{}H(x)f(x) \leq 0
-  \end{equation}
-\end{slide}
-
-\begin{slide}{Lyapunov's Theorem}
-  \begin{equation}
-    \begin{aligned}
-      V(x)       & = 0 \iff x = 0,                                       \\
-      V(x)       & > 0 \iff x \ne 0,                                     \\
-      V(x_{1})   & > V(x_{2}) \iff \norm{x_{1}} > \norm{x_{2}},          \\
-      \dot{V}(x) & = \nabla{}V(x)f(x) \le 0 \phantom{0} \forall x \ne 0.
-    \end{aligned}
-  \end{equation}
 \end{slide}

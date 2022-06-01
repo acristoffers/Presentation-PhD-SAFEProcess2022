@@ -1,0 +1,31 @@
+% !TeX root = ../root.tex
+% !TeX encoding = UTF-8 Unicode
+
+\begin{figure}[ht!]
+  \centering
+  \resizebox{\linewidth}{!}{%
+    \begin{tikzpicture}[node distance=1cm,block/.style={align=center,draw,shape=rectangle,very thick,minimum height=2em, minimum width=3em},>=stealth]
+
+      \node (ref) []                                      {\(\mathrm{ref}(k)\)};
+      \node (C)   [block,right=of ref]                    {Controller};
+      \node (G)   [block,right=of C]                      {System};
+      \node (y)   [right=2cm of G]                        {\(y(k)\)};
+      \node (O)   [block,below=of G]                      {Observer};
+      \node (R)   [block,right=of O, below=of y]          {Residual\\Generator};
+      \node (r)   [right=of R]                            {\(r(k)\)};
+      \node (l)   [below=0.25cm of O.south east]          {one for each sensor};
+      \node       [draw,rectangle,dashed,fit=(O) (R) (l)] {};
+
+      \draw [->,thick] (ref) -- (C);
+      \draw [->,thick] (C)   -- node (u) [above] {\(u(k)\)} (G);
+      \draw [->,thick] (G)   -- (y);
+      \draw [->,thick] (u)   |- (O);
+      \draw [->,thick] (y)   -- (R);
+      \draw [->,thick] (y)   |- ++(0,-0.75) -| (O.north);
+      \draw [->,thick] (O)   -- node (w) [above] {\(w(k)\)} (R);
+      \draw [->,thick] (R)   -- (r);
+    \end{tikzpicture}%
+  }
+  \caption{Observer's block diagram}%
+  \label{fig:schematic}
+\end{figure}
