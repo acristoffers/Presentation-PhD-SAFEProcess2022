@@ -1,0 +1,145 @@
+% !TeX root = document.tex
+% !TeX encoding = UTF-8 Unicode
+
+\section{Zero-Dynamics Attack}%
+\label{sec:zda}
+
+\subsection{Introduction}%
+\label{subsec:ts-introduction}
+
+\begin{slide}{}
+  \usebeamercolor{frametitle}
+  \vspace*{\fill}
+  \begin{center}
+    \textcolor{fg}{\Large{Zero-Dynamics Attack}}
+  \end{center}
+  \vspace*{\fill}
+\end{slide}
+
+\begin{slide}{Zero-Dynamics Attack}
+  \begin{columns}[c]
+    \begin{column}{0.48\textwidth}
+      The attacker changes the control signal in a specific direction, taking
+      advantage of the system's transmission zeros to change the system's states
+      without affecting the system's output.
+      \includegraphics[width=\linewidth]{ct-system}
+    \end{column}%
+    \hfill%
+    \begin{column}{0.48\textwidth}
+      \begin{align}
+        P(s)          & = \begin{bmatrix}
+                            sI-A & -B \\
+                            C    & D
+                          \end{bmatrix},                                \\
+        P(s_{0})z_{0} & = 0.                                            \\
+        z_{0}         & = \begin{bmatrix} x_{0} \\ a_{0} \end{bmatrix}, \\
+        a(t)          & = a_{0}e^{s_{0}t},                              \\
+        \tilde{u}(t)  & =u(t) + a(t).
+      \end{align}
+    \end{column}%
+  \end{columns}
+\end{slide}
+
+\begin{slide}{Zero-Dynamics Attack}
+  Current detection schemes in the literature:\\~\\
+  \begin{itemize}
+    \item Generalized Zero-Order Holders
+    \item Modified system models
+    \item Schemes with multiple observers
+  \end{itemize}
+\end{slide}
+
+\begin{slide}{Time-Scale Calculus}
+  \begin{columns}[c]
+    \begin{column}{0.48\textwidth}
+      \begin{itemize}
+        \item Unifies the continuous- and discrete-time calculi.
+        \item Uses the so-called delta-derivative (\(\Delta\)-derivative).
+        \item Exists for different time-sets, not only the continuous and
+              discrete case.
+      \end{itemize}
+      \begin{figure}[ht!]
+        \centering
+        \includegraphics[width=0.6\linewidth]{ts-jump}
+        \caption{Time-Scale jump operators. Source: \url{https://shorturl.at/bcJY1}}%
+      \end{figure}
+    \end{column}%
+    \hfill%
+    \begin{column}{0.48\textwidth}
+      \begin{equation}
+        \mathbb{T} = h\mathbb{Z} | \mathbb{R} | \mathbb{T}_{\textrm{iso}}
+      \end{equation}
+      %
+      \begin{align}
+        \textrm{forward:~}  & \sigma(t) = \inf\{\tau\in\mathbb{T}|\tau>t\}, \\
+        \textrm{backward:~} & \rho(t) = \sup\{\tau\in\mathbb{T}|\tau<t\}.
+      \end{align}
+      %
+      \begin{equation}
+        \mu(t) = \sigma(t)-t \leftarrow \textrm{graininess}
+      \end{equation}
+      %
+      \begin{equation}
+        f(\sigma(t)) = f(t) + \mu(t)f^{\Delta}(t).
+      \end{equation}
+    \end{column}%
+  \end{columns}
+\end{slide}
+
+\begin{slide}{Time-Scale System}
+  \begin{columns}[c]
+    \begin{column}{0.48\textwidth}
+      \begin{itemize}
+        \item Allows to evolve the system with arbitrary sampling-times.
+        \item Has it own stability criteria based on the Hilger's circle.
+      \end{itemize}
+    \end{column}%
+    \hfill%
+    \begin{column}{0.48\textwidth}
+      \begin{align}
+        x^{\Delta}(t) & = A(\mu(t))x(t) + B(\mu(t))u(t),                      \\
+        y(t)          & = Cx(t) + Du(t),                                      \\
+        \phantom{1}   & \phantom{1}                                 \nonumber \\
+        A(\mu(t))     & = \frac{e^{A\mu(t)}-I}{\mu(t)},                       \\
+        B(\mu(t))     & = \int_{0}^{\mu(t)}\frac{e^{(\mu(t)-s)A}}{\mu(t)}Bds.
+      \end{align}
+    \end{column}%
+  \end{columns}
+\end{slide}
+
+\begin{slide}{Stability Criteria}
+  \begin{columns}[c]
+    \begin{column}{0.48\textwidth}
+      The system is stable if all of it's poles are within the Hilger's circle,
+      defined as a the circle centered at \((-\frac{1}{\mu}, 0)\) and with
+      radius \(\frac{1}{\mu}\).
+
+      Note that the circle changes with the sampling-time (\(\mu\)).
+    \end{column}%
+    \hfill%
+    \begin{column}{0.48\textwidth}
+      \begin{figure}[ht!]
+        \centering
+        \resizebox{\linewidth}{!}{%
+          \begin{tikzpicture}
+            \fill [blue!40!white]           (0, 0) rectangle (1, 2);
+            \draw [step=1cm,gray,very thin] (0, 0) grid      (2, 2);
+            \node at (1, -0.25) {\(\dot{x}=f(x)\)};
+
+            \fill [blue!40!white]           (3.5, 1) circle (0.5);
+            \draw [step=1cm,gray,very thin] (3, 0)   grid   (5, 2);
+            \node at (4, -0.25) {\(\Delta{}x=f(x)\)};
+
+            \fill [orange!40!white]         (6.5, 1) circle (0.5);
+            \fill [blue!40!white]           (6.6, 1) circle (0.4);
+            \fill [green!40!white]          (6.7, 1) circle (0.3);
+            \draw [step=1cm,gray,very thin] (6, 0)   grid   (8, 2);
+            \node at (7, -0.25) {\(x^{\Delta{}}=f(x)\)};
+          \end{tikzpicture}%
+        }
+        \caption{Different stability regions}%
+        \label{fig:stability-regions}
+      \end{figure}
+    \end{column}%
+  \end{columns}
+\end{slide}

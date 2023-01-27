@@ -1,0 +1,123 @@
+% !TeX root = document.tex
+% !TeX encoding = UTF-8 Unicode
+
+\subsection{Observer Design}%
+\label{subsec:ts-observer-design}
+
+\begin{slide}{Observer Design}
+  \begin{columns}[c]
+    \begin{column}{0.55\textwidth}
+      \begin{itemize}
+        \item Develop a Lyapunov-based LPV observer.
+      \end{itemize}
+    \end{column}%
+    \hfill%
+    \begin{column}{0.55\textwidth}
+      \begin{figure}[ht!]
+        \centering
+        \resizebox{0.6\linewidth}{!}{%
+          \begin{tikzpicture}[node distance=1cm,block/.style={align=center,draw,shape=rectangle,very thick,minimum height=2em, minimum width=3em},>=stealth]
+            \node (C) [block]                             {Controller};
+            \node (G) [block,above=1.5cm of C]            {System};
+            \node (H) [block,above=of G]                  {Time-Scale Observer};
+            \node (J) [block,above=of H]                  {Residual Generator};
+            \node (u) [above left=0.5cm and 1cm of C]     {\(u(t)\)};
+            \node (y) [above right=0.5cm and 1cm of C]    {\(y(t)\)};
+            \node (r) [right=0.5cm of J]                  {\(r(t)\)};
+            \node     [draw,rectangle,dashed,fit=(u) (y)] {Network};
+
+            \draw [->,thick] (C) -| (u) |- (G);
+            \draw [->,thick] (G) -| (y) |- (C);
+            \draw [->,thick] (u) |- (H);
+            \draw [->,thick] (y) |- (H);
+            \draw [->,thick] (H) -- (J) -- (r);
+          \end{tikzpicture}%
+        }
+        \caption{Observer's block diagram}%
+        \label{fig:ts-schematic}
+      \end{figure}
+    \end{column}%
+  \end{columns}
+\end{slide}
+
+\begin{slide}{Observer Design Development}
+  \begin{columns}[c]
+    \begin{column}{0.55\textwidth}
+      \begin{align}
+        x^{\Delta} & = Ax + Bu, \\
+        y          & = Cx,
+      \end{align}
+      %
+      \begin{gather}
+        V = x\tr{}Px
+      \end{gather}
+      %
+      \begin{gather}
+        x(\sigma(t)) = x(t) + \mu(t)x^{\Delta}(t).
+      \end{gather}
+      %
+      \begin{gather}
+        PA + A\tr{}P + \mu{}A\tr{}PA \prec{} 0 \\
+        P \succ{} 0
+      \end{gather}
+    \end{column}%
+    \hfill%
+    \begin{column}{0.55\textwidth}
+      \begin{gather}
+        \begin{bmatrix}
+          M     & (PA - ZC)  \\
+          \star & -\mu^{-1}P
+        \end{bmatrix} \prec{} 0,  \\
+        M = PA + A\tr{}P - ZC - C\tr{}Z\tr{}.
+      \end{gather}
+      %
+      \begin{equation}
+        Z = PL.
+      \end{equation}
+      %
+      \begin{equation}
+        x^{\Delta} = Ax + Bu -L(y - Cx).
+      \end{equation}
+    \end{column}%
+  \end{columns}
+\end{slide}
+
+\begin{slide}{Observer Design Development}
+  \begin{columns}[c]
+    \begin{column}{0.55\textwidth}
+      An LPV observer for a time-scale system of the form
+      %
+      \begin{align}
+        \hat{x}^{\Delta} & = A(\mu)\hat{x} + B(\mu)u - L(\mu)(y - C\hat{x}),                                                                                                            \\
+        L(\mu)           & = \sum_{i=0}^{3}\alpha_{i}(\mu)L_{i},                                                                                                                        \\
+        \alpha_{0}(\mu)  & = \textcolor{frenchblue}{\frac{\bar{\mu}^{-1}-\mu^{-1}}{\bar{\mu}^{-1}-\ubar{\mu}^{-1}}}  \textcolor{flame}{\frac{\bar{\mu}-\mu}{\bar{\mu}-\ubar{\mu}}},  \\
+        \alpha_{1}(\mu)  & = \textcolor{frenchblue}{\frac{\mu^{-1}-\ubar{\mu}^{-1}}{\bar{\mu}^{-1}-\ubar{\mu}^{-1}}} \textcolor{flame}{\frac{\bar{\mu}-\mu}{\bar{\mu}-\ubar{\mu}}},  \\
+        \alpha_{2}(\mu)  & = \textcolor{frenchblue}{\frac{\bar{\mu}^{-1}-\mu^{-1}}{\bar{\mu}^{-1}-\ubar{\mu}^{-1}}}  \textcolor{flame}{\frac{\mu-\ubar{\mu}}{\bar{\mu}-\ubar{\mu}}}, \\
+        \alpha_{3}(\mu)  & = \textcolor{frenchblue}{\frac{\mu^{-1}-\ubar{\mu}^{-1}}{\bar{\mu}^{-1}-\ubar{\mu}^{-1}}} \textcolor{flame}{\frac{\mu-\ubar{\mu}}{\bar{\mu}-\ubar{\mu}}},
+      \end{align}
+    \end{column}%
+    \hfill%
+    \begin{column}{0.55\textwidth}
+      \begin{align}
+                 & \begin{bmatrix}
+                     M(\cubar{\mu},0) & PA(\cubar{\mu}) - Z_{0}C \\
+                     \star            & -\frac{1}{\cubar{\mu}}P
+                   \end{bmatrix} \prec{} 0,  \\
+                 & \begin{bmatrix}
+                     M(\cbar{\mu},1) & PA(\cbar{\mu}) - Z_{1}C \\
+                     \star           & -\frac{1}{\cubar{\mu}}P
+                   \end{bmatrix} \prec{} 0,    \\
+                 & \begin{bmatrix}
+                     M(\cubar{\mu},2) & PA(\cubar{\mu}) - Z_{2}C \\
+                     \star            & -\frac{1}{\cbar{\mu}}P
+                   \end{bmatrix} \prec{} 0, \\
+                 & \begin{bmatrix}
+                     M(\cbar{\mu},3) & PA(\cbar{\mu}) - Z_{3}C \\
+                     \star           & -\frac{1}{\cbar{\mu}}P
+                   \end{bmatrix} \prec{} 0,   \\
+        M(\mu,i) & = PA(\mu) + A(\mu)\tr{}P - Z_{i}C - C\tr{}Z_{i}\tr,     \\
+        L_{i}    & = P^{-1}Z_{i}.
+      \end{align}
+    \end{column}%
+  \end{columns}
+\end{slide}

@@ -70,6 +70,7 @@
 \RequirePackage{amsfonts} % Mathematical fonts
 \RequirePackage{cancel} % In math mode, variables to strike
 \RequirePackage{subscript} % For subscript
+\RequirePackage{accents}
 
 % Table manipulation
 \RequirePackage{multirow} % Multirow tables
@@ -178,14 +179,14 @@
   \end{textblock}
   \begin{textblock*}{\textwidth}(50pt,240pt)
     \begin{flushright}
-      \footnotesize{e Sousa, Messai, Manamanni}
+      \footnotesize{Álan e Sousa}
     \end{flushright}
   \end{textblock*}
 }
 
-\newenvironment{slide}[1]
+\newenvironment{slide}[2][t]
 {
-  \begin{frame}{#1}
+  \begin{frame}[#1]{#2}
     \addlogo{}
     \vspace*{\fill}
     }

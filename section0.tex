@@ -1,0 +1,71 @@
+% !TeX root = document.tex
+% !TeX encoding = UTF-8 Unicode
+
+\section{Introduction}%
+\label{sec:introduction}
+
+\begin{slide}{Attacks on Dynamic Systems}
+  \begin{columns}[c]
+    \begin{column}{0.48\textwidth}
+      \begin{itemize}
+        \item Denial of Service
+        \item False Data Injection
+        \item Topology Attack
+        \item Zero-Dynamics
+        \item Replay Attack
+      \end{itemize}
+    \end{column}%
+    \hfill%
+    \begin{column}{0.48\textwidth}
+      \begin{figure}[ht!]
+        \centering
+        \resizebox{\linewidth}{!}{%
+          \begin{tikzpicture}[node distance=1cm,block/.style={align=center,draw,shape=rectangle,very thick,minimum height=2em, minimum width=3em},>=stealth]
+            \node (C) [block]                             {Controller};
+            \node (G) [block,above=1.5cm of C]            {System};
+            \node (u) [above left=0.5cm and 1cm of C]     {\(u(t)\)};
+            \node (y) [above right=0.5cm and 1cm of C]    {\(y(t)\)};
+            \node     [draw,rectangle,dashed,fit=(u) (y)] {Network};
+
+            \draw [->,thick] (C) -| (u) |- (G);
+            \draw [->,thick] (G) -| (y) |- (C);
+          \end{tikzpicture}%
+        }
+        \caption{Cyber-Physical System's block diagram}%
+      \end{figure}
+    \end{column}%
+  \end{columns}
+\end{slide}
+
+\begin{slide}[noframenumbering]{Attacks on Dynamic Systems}
+  \begin{columns}[c]
+    \begin{column}{0.48\textwidth}
+      \begin{itemize}
+        \item Denial of Service
+        \item \textcolor{orange}{False Data Injection}
+        \item Topology Attack
+        \item \textcolor{orange}{Zero-Dynamics}
+        \item Replay Attack
+      \end{itemize}
+    \end{column}%
+    \hfill%
+    \begin{column}{0.48\textwidth}
+      \begin{figure}[ht!]
+        \centering
+        \resizebox{\linewidth}{!}{%
+          \begin{tikzpicture}[node distance=1cm,block/.style={align=center,draw,shape=rectangle,very thick,minimum height=2em, minimum width=3em},>=stealth]
+            \node (C) [block]                             {Controller};
+            \node (G) [block,above=1.5cm of C]            {System};
+            \node (u) [above left=0.5cm and 1cm of C]     {\(u(t)\)};
+            \node (y) [above right=0.5cm and 1cm of C]    {\(y(t)\)};
+            \node     [draw,rectangle,dashed,fit=(u) (y)] {Network};
+
+            \draw [->,thick] (C) -| (u) |- (G);
+            \draw [->,thick] (G) -| (y) |- (C);
+          \end{tikzpicture}%
+        }
+        \caption{Cyber-Physical System's block diagram}%
+      \end{figure}
+    \end{column}%
+  \end{columns}
+\end{slide}

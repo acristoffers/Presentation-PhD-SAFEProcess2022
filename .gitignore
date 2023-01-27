@@ -3,3 +3,5 @@ build
 *.log
 svg-inkscape
 .svg-inkscape
+.DS_Store
+Thumbs.db

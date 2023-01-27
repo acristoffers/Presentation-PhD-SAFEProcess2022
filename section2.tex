@@ -1,18 +1,12 @@
 % !TeX root = document.tex
 % !TeX encoding = UTF-8 Unicode
 
-\section{Observer Design}%
-\label{sec:observer-design}
-
-\subsection{Bank of Observers}%
-\label{subsec:bank-of-observers}
+\subsection{Observer Design}%
+\label{subsec:observer-design}
 
 \begin{slide}{Bank of Observers}
   \input{imgs/schematic}
 \end{slide}
-
-\subsection{Observer Design}%
-\label{subsec:observer-design}
 
 \begin{slide}{Observer Design}
   \begin{columns}[c]
@@ -41,7 +35,7 @@
       \begin{align}
         \begin{split}
           X = & \hat{A}^{\top}F^{\top}P - \hat{A}^{\top}C^{\top}\hat{E}^{\top} -                 \\
-          & \hat{C}^{\top}\hat{K}^{\top} + PF\hat{A} - \hat{E}C\hat{A} - \hat{K}\hat{C} - \lambda{}I,
+              & \hat{C}^{\top}\hat{K}^{\top} + PF\hat{A} - \hat{E}C\hat{A} - \hat{K}\hat{C} - \lambda{}I,
         \end{split} \\
         W = & \sqrt{\lambda}(PF - \hat{E}C).
       \end{align}
@@ -50,20 +44,20 @@
     \begin{column}{0.55\textwidth}
       \begin{align}
         \begin{split}
-          \hat{A} & = AF^{+},              \\
-          \hat{C} & = CF^{+},              \\
-          \hat{E} & = PE = PU + \hat{Y}V,  \\
-          \hat{K} & = PK,                  \\
+          \hat{A} & = AF^{+},               \\
+          \hat{C} & = CF^{+},               \\
+          \hat{E} & = P\mE = PU + \hat{Y}V, \\
+          \hat{K} & = PK,                   \\
           \hat{Y} & = PY.
         \end{split} \\\nonumber\\
         \begin{split}
-          K & = P^{-1}\hat{K},  \\
-          Y & = P^{-1}\hat{Y},  \\
-          E & = U + YV,         \\
-          R & = F - EC,         \\
-          N & = (RA - KC)F^{+}, \\
-          J & = K + NE,         \\
-          H & = RB.
+          K   & = P^{-1}\hat{K},  \\
+          Y   & = P^{-1}\hat{Y},  \\
+          \mE & = U + YV,         \\
+          R   & = F - \mE{}C,     \\
+          \mN & = (RA - KC)F^{+}, \\
+          \mJ & = K + N\mE{},     \\
+          \mH & = RB.
         \end{split}
       \end{align}
     \end{column}%
@@ -76,14 +70,14 @@
       \begin{align}
         \begin{split}
           e & = \hat{z} - z   \\
-          & = w + Ey - Fx   \\
-          & = w + ECx - Fx.
+            & = w + \mE{}y - Fx   \\
+            & = w + \mE{}Cx - Fx.
         \end{split} \\
         \begin{split}
-          \dot{e} & = \dot{w} + (EC-F)\dot{x}              \\
-          & = Nw + Jy + Hu + (EC-F)(Ax + Bu + Lf)  \\
-          & = Ne + (NF-NEC+ECA-FA+JC)x +           \\
-          & \phantom{=~} (H+ECB-FB)u + (ECL-FL)f.
+          \dot{e} & = \dot{w} + (\mE{}C-F)\dot{x}              \\
+                  & = \mN{}w + \mJ{}y + \mH{}u + (\mE{}C-F)(Ax + Bu + Lf)  \\
+                  & = \mN{}e + (\mN{}F-\mN{}\mE{}C+\mE{}CA-FA+\mJ{}C)x +           \\
+                  & \phantom{=~} (\mH{}+\mE{}CB-FB)u + (\mE{}CL-FL)f.
         \end{split}
       \end{align}
     \end{column}%
@@ -91,13 +85,13 @@
     \begin{column}{0.55\textwidth}
       \begin{align}
         \begin{split}
-          N \textrm{ must be Hurwitz-stable}, &      \\
-          N(F-EC)-(F-EC)A+JC                  & = 0, \\
-          H-(F-EC)B                           & = 0.
+          \mN{} \textrm{ must be Hurwitz-stable}, &      \\
+          \mN{}(F-\mE{}C)-(F-\mE{}C)A+\mJ{}C      & = 0, \\
+          \mH{}-(F-\mE{}C)B                       & = 0.
         \end{split} \\\nonumber\\
         \begin{split}
-          (F-EC)L_{i} & = 0,     \\
-          (F-EC)L_{n} & \neq 0.
+          (F-\mE{}C)L_{i} & = 0,     \\
+          (F-\mE{}C)L_{n} & \neq 0.
         \end{split}
       \end{align}
     \end{column}%
@@ -108,23 +102,23 @@
   \begin{columns}[c]
     \begin{column}{0.55\textwidth}
       \begin{align}
-        V             & = e^{\top}Pe,          \\
-        \dot{e}       & = Ne-(F-EC)L_{n}f,     \\
-        e             & \propto L_{n}f,        \\
-        \norm{L_{n}f} & = \lambda{}\norm{e},   \\
-        R             & = F-EC,                \\
-        \dot{e}       & = Ne-R\lambda\norm{e}.
+        V             & = e^{\top}Pe,              \\
+        \dot{e}       & = \mN{}e-(F-\mE{}C)L_{n}f, \\
+        e             & \propto L_{n}f,            \\
+        \norm{L_{n}f} & = \lambda{}\norm{e},       \\
+        R             & = F-\mE{}C,                \\
+        \dot{e}       & = \mN{}e-R\lambda\norm{e}.
       \end{align}
     \end{column}%
     \hfill%
     \begin{column}{0.55\textwidth}
       \begin{align}
         \begin{split}
-          \dot{V} & = \dot{e}^{\top}Pe + e^{\top}P\dot{e}                                     \\
-          & = (Ne-\lambda{}R\norm{e})^{\top}Pe + e^{\top}P(Ne-\lambda{}R\norm{e})     \\
-          & = e^{T}(N^{\top}P + PN)e - 2\lambda\norm{e^{\top}PR}\cdot\norm{e}         \\
-          & \leq e^{T}(N^{\top}P + PN)e - \lambda(\norm{e^{\top}PR}^{2}+\norm{e}^{2}) \\
-          & = e^{T}(N^{\top}P + PN - \lambda{}PRR^{\top}P - \lambda{}I)e.
+          \dot{V} & = \dot{e}^{\top}Pe + e^{\top}P\dot{e}                                             \\
+                  & = (\mN{}e-\lambda{}R\norm{e})^{\top}Pe + e^{\top}P(\mN{}e-\lambda{}R\norm{e})     \\
+                  & = e^{T}(\mN{}^{\top}P + P\mN{})e - 2\lambda\norm{e^{\top}PR}\cdot\norm{e}         \\
+                  & \leq e^{T}(\mN{}^{\top}P + P\mN{})e - \lambda(\norm{e^{\top}PR}^{2}+\norm{e}^{2}) \\
+                  & = e^{T}(\mN{}^{\top}P + P\mN{} - \lambda{}PRR^{\top}P - \lambda{}I)e.
         \end{split}
       \end{align}
     \end{column}%
@@ -136,18 +130,18 @@
     \begin{column}{0.55\textwidth}
       \begin{align}
         \begin{split}
-          N(F-EC) & = RA-JC,                               \\
-          NF      & = RA-(J-NE)C,                          \\
-          K       & = J-NE,                                \\
-          N       & = RAF^{+}-KCF^{+},
+          \mN{}(F-\mE{}C) & = RA-\mJ{}C,              \\
+          \mN{}F          & = RA-(\mJ{}-\mN{}\mE{})C, \\
+          K               & = \mJ{}-\mN{}\mE{},       \\
+          \mN{}           & = RAF^{+}-KCF^{+},
         \end{split} \\
         \begin{split}
-          (F-EC)L_{i} & = 0,                                              \\
-          ECL_{i}     & = FL_{i},                                         \\
-          E           & = FL_{i}(CL_{i})^{+} + Y(I-(CL_{i})(CL_{i})^{+}), \\
-          U           & = ECL_{i}L_{i}^{+},                               \\
-          V           & = I-L_{i}L_{i}^{+},                               \\
-          E           & = U+YV.
+          (F-\mE{}C)L_{i} & = 0,                                              \\
+          \mE{}CL_{i}     & = FL_{i},                                         \\
+          \mE{}           & = FL_{i}(CL_{i})^{+} + Y(I-(CL_{i})(CL_{i})^{+}), \\
+          U               & = \mE{}CL_{i}L_{i}^{+},                           \\
+          V               & = I-L_{i}L_{i}^{+},                               \\
+          \mE{}           & = U+YV.
         \end{split}
       \end{align}
     \end{column}%
@@ -155,18 +149,15 @@
     \begin{column}{0.55\textwidth}
       \begin{align}
         \begin{split}
-          \dot{V} & = e^{T}((R\hat{A} - EC\hat{A} - K\hat{C})^{\top}P +                                         \\
-          & P(R\hat{A} - EC\hat{A} - K\hat{C}) - \lambda{}PRR^{\top}P - \lambda{}I)e.                   \\
-          & = \hat{A}^{\top}F^{\top}P - \hat{A}^{\top}C^{\top}\hat{E}^{\top} - \hat{C}^{\top}K^{\top} + \\
-          & PF\hat{A} - \hat{E}C\hat{A} - K\hat{C} - \lambda{}PRR^{\top}P - \lambda{}I.
+          \dot{V} & = e^{T}((R\hat{A} - \mE{}C\hat{A} - K\hat{C})^{\top}P +                                     \\
+                  & P(R\hat{A} - \mE{}C\hat{A} - K\hat{C}) - \lambda{}PRR^{\top}P - \lambda{}I)e.               \\
+                  & = \hat{A}^{\top}F^{\top}P - \hat{A}^{\top}C^{\top}\hat{E}^{\top} - \hat{C}^{\top}K^{\top} + \\
+                  & PF\hat{A} - \hat{E}C\hat{A} - K\hat{C} - \lambda{}PRR^{\top}P - \lambda{}I.
         \end{split}
       \end{align}
     \end{column}%
   \end{columns}
 \end{slide}
-
-\subsection{Residual Generator}%
-\label{subsec:residual-generator}
 
 \begin{slide}{Residual Generator}
   \begin{columns}[c]
@@ -175,7 +166,7 @@
         r(t) & = Gw(t) + My(t), \\
         \begin{split}
           M & = (C(1-L_{i}))^{\top},      \\
-          G & = -M(I-CF^{+}E)^{-1}CF^{+},
+          G & = -M(I-CF^{+}\mE{})^{-1}CF^{+},
         \end{split}
       \end{align}
     \end{column}%
@@ -183,14 +174,14 @@
     \begin{column}{0.55\textwidth}
       \begin{align}
         \begin{split}
-          r & = Gw + My                                     \\
-            & = Q(y - Cx)                                   \\
-            & = Q(y - CF^{-1}\hat{z})                       \\
-            & = Q(y - CF^{-1}(w+Ey))                        \\
-            & = Q((I-CF^{-1}E)y - CF^{-1}w),
+          r & = Gw + My                          \\
+            & = Q(y - Cx)                        \\
+            & = Q(y - CF^{-1}\hat{z})            \\
+            & = Q(y - CF^{-1}(w+\mE{}y))         \\
+            & = Q((I-CF^{-1}\mE{})y - CF^{-1}w),
         \end{split} \\
         \begin{split}
-          M & = Q(I-CF^{-1}E),                              \\
+          M & = Q(I-CF^{-1}\mE{}), \\
           G & = -QCF^{-1}.
         \end{split}
       \end{align}
