@@ -92,9 +92,9 @@
 \defaultfontfeatures{Ligatures=TeX}
 \usetheme{Dresden}
 \usefonttheme{serif,professionalfonts}
-\setmainfont{Georgia}
+\setmainfont{DejaVu Sans}
 \setmathfont{Latin Modern Math}
-\setmonofont{Inconsolata Nerd Font Mono}
+\setmonofont{JetBrainsMono Nerd Font Mono}
 \setmathrm{Latin Modern Math}
 
 \setbeamertemplate{headline}
